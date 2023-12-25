@@ -3,9 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Home page</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" />
   </head>
   <body>
     <h1>Home Page</h1>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+      <% data.forEach(data => { %> <% if (data.isHome) { %>
+      <div class="col">
+        <%- include('partials/product', data) %>
+      </div>
+      <% } %> <% }) %>
+    </div>
   </body>
 </html>

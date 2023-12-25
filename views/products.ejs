@@ -3,21 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Products Page</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" />
   </head>
   <body>
-    <h1>Products page</h1>
-    <div class="product-container">
+    <h1>Products</h1>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
       <% data.forEach(data => { %>
-      <div class="product">
-        <a href="./products/<%= data.id %>">
-          <h2><%= data.name %></h2>
-          <div class="product-photo">
-            <img src="<%= data.photo %>" alt="" />
-          </div>
-          <h4><%= data.price %> <%= data.currency %></h4>
-        </a>
+      <div class="col">
+        <%- include('partials/product', data) %>
       </div>
       <% }) %>
     </div>

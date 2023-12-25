@@ -1,32 +1,8 @@
-// var http = require("http") //node modules => http, fs, os
-// var fs = require("fs")
-// var server = http.createServer((req, res) => {
-//     if(req.url == "/"){
-//         fs.readFile("index.html", (err, html) => {
-//           res.write(html);
-//           res.end();
-//         });
-//     } else if(req.url == "/products"){
-//         fs.readFile("products.html", (err, html) => {
-//           res.write(html);
-//           res.end();
-//         });
-//     }  else {
-//          fs.readFile("404.html", (err, html) => {
-//            res.write(html);
-//            res.end();
-//          });
-//     }
-// })
-
-// server.listen(3000, () => {
-//     console.log("node.js server at port 3000")
-// })
-
 const express = require("express");
 const app = express();
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(express.static("node_modules"));
 
 const products = [
   {
@@ -36,6 +12,10 @@ const products = [
     isActive: true,
     currency: "AZN",
     photo: "/img/iphone-15-pro.png",
+    rating: 4,
+    isHome: false,
+    description:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum ad sit nam molestiae mollitia libero, voluptatibus quae cum ea. Ipsa aliquam a reprehenderit repudiandae, quia accusamus quo molestias Feligendi vel!",
   },
   {
     id: 2,
@@ -44,6 +24,10 @@ const products = [
     isActive: false,
     currency: "AZN",
     photo: "/img/macbook-pro-16.png",
+    rating: 5,
+    isHome: true,
+    description:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum ad sit nam molestiae mollitia libero, voluptatibus quae cum ea. Ipsa aliquam a reprehenderit repudiandae, quia accusamus quo molestias Feligendi vel!",
   },
   {
     id: 3,
@@ -52,6 +36,10 @@ const products = [
     isActive: true,
     currency: "AZN",
     photo: "/img/airpods-max.png",
+    rating: 3,
+    isHome: true,
+    description:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum ad sit nam molestiae mollitia libero, voluptatibus quae cum ea. Ipsa aliquam a reprehenderit repudiandae, quia accusamus quo molestias Feligendi vel!",
   },
   {
     id: 4,
@@ -60,34 +48,29 @@ const products = [
     isActive: true,
     currency: "AZN",
     photo: "/img/airpods-2.png",
+    rating: 5,
+    isHome: false,
+    description:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum ad sit nam molestiae mollitia libero, voluptatibus quae cum ea. Ipsa aliquam a reprehenderit repudiandae, quia accusamus quo molestias Feligendi vel!",
   },
 ];
-
-//routes
-
-// app.use("/products/:id", function (req, res) {
-//     res.send("products details" + " " + req.params.id)
-// });
-
-// app.use("/products", function (req, res) {
-//   res.send("products");
-// });
-// app.use("/", function (req, res) {
-//   res.send("homepage");
-// });
 
 app.use("/products/:id", function (req, res) {
   const productInfo = products.find((u) => u.id == req.params.id);
   res.render("productDetails", productInfo);
 });
 
+
 app.use("/products", function (req, res) {
   res.render("products", {
     data: products,
   });
 });
+
 app.use("/", function (req, res) {
-  res.render("index");
+  res.render("index", {
+    data: products,
+  });
 });
 
 app.listen(3000, (req, res) => {

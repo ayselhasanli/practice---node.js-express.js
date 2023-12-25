@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" />
   </head>
   <body>
-    <h1>Products</h1>
-    <div class="row row-cols-1 row-cols-md-4 g-4">
-      <% data.forEach(data => { %>
-      <div class="col">
-        <%- include('partials/product', data) %>
+     <%- include('partials/nav') %>
+    <div class="container mt-3">
+      <h1>Products</h1>
+      <div class="row row-cols-1 row-cols-md-4 g-4">
+        <% data.forEach(data => { %>
+        <div class="col"><%- include('partials/product', data) %></div>
+        <% }) %>
       </div>
-      <% }) %>
     </div>
   </body>
 </html>

@@ -23,6 +23,17 @@ router.use("/products", async function (req, res) {
   }
 });
 
+router.use("/admin", async function (req, res) {
+  try {
+    const [products] = await db.execute("select * from products");
+    res.render("admin", {
+      data: products,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 router.use("/", async function (req, res) {
   try {
     const [products] = await db.execute(
